@@ -1,0 +1,5 @@
+<!-- image -->
+
+## This is an example of an Image-based PDF" (also known as image-only PDFs).
+
+Image-based PDFs are typically created through scanning paper in a copier; photographs Or screenshots. To a computer, are images. Though we humans can see text in the image, the file only consists of the image layer but not the searchable text that True PDFs contain. As a result, we cannot use a computer to search the text we see in the image as that text layer is missing: There are times when discovery is produced, it will be in an image-based PDF format. When you come across image-based PDFs; ask the U.S. Attomey's Office in what format was that file originally . Second, ask if have it in a searchable format and specifically if have it in a digitally created, True, Text-based PDF format. may not, as often receive PDFs from other sources before provide them to you, but you will want to know what is the format in which have it in, and what is the original format of the file (as far as know) taking taking they layer they they They they they they they
