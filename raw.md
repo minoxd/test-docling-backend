@@ -1,5 +1,22 @@
-<!-- image -->
+## Parts of a Simple Flower
 
-## This is an example of an Image-based PDF" (also known as image-only PDFs).
+Wild Geranium, Geranium maculatum
 
-Image-based PDFs are typically created through scanning paper in a copier; photographs Or screenshots. To a computer, are images. Though we humans can see text in the image, the file only consists of the image layer but not the searchable text that True PDFs contain. As a result, we cannot use a computer to search the text we see in the image as that text layer is missing: There are times when discovery is produced, it will be in an image-based PDF format. When you come across image-based PDFs; ask the U.S. Attomey's Office in what format was that file originally . Second, ask if have it in a searchable format and specifically if have it in a digitally created, True, Text-based PDF format. may not, as often receive PDFs from other sources before provide them to you, but you will want to know what is the format in which have it in, and what is the original format of the file (as far as know) taking taking they layer they they They they they they they
+![Image](raw_artifacts\image_000000_661e1bf93aedc8c56f2bf4146c3654d628feeae6f38d3991d268d67780835183.png)
+
+## Definitions:
+
+- Sepals -The outermost part of the flower, often green but sometimes looking like petals, that usually enclose the flower bud before it opens.
+- Petals - The inner ring of the flower that tend to be brightly colored and often function to attract pollinators.
+- Stamen - The male part of the flower that serves to produce pollen; it is composed of the pollen-bearing anther and the stalk-like filament.
+- Pistil The female part of the flower that typically consists of the stigma at the top which receives the pollen, the narrow style , and the ovary which contains ovules that will later develop into seeds.
+
+## Parts of a Composite Flower
+
+Green and Gold, Chrysogonum virginianum
+
+![Image](raw_artifacts\image_000001_f8a9d12fc9e4159f4588e9bcdfc2967d14b2cb5869b30f1bb69739417d53f5f1.png)
+
+## Notes:
+
+Composite flowers can be made of all ray flowers that look like the petals of a 'normal' flower (e.g. dandelions), all small knobby disk flowers (e.g. thistles), or both types (like this one, Green and Gold). The single petal on a ray flower is called a ligule . On both ray and disk flowers, the pollen-producing anthers are typically fused together into a tube; on a disk flower, the petals are also typically fused. The pistil , commonly with two curling lobes, emerges as each disk or ray flower matures. In Green and Gold, the ray flowers are lacking stamens (pistillate).
