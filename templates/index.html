@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Chunking App</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold mb-4">Document Chunking App</h1>
+        <form hx-post="/upload" hx-target="#result" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Upload File</label>
+                <input type="file" name="file" class="mt-1 block w-full p-2 border rounded">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Or Enter URL</label>
+                <label>
+                    <input type="url" name="url" placeholder="https://example.com" class="mt-1 block w-full p-2 border rounded">
+                </label>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Process</button>
+        </form>
+        <div id="result" class="mt-6"></div>
+    </div>
+</body>
+</html>

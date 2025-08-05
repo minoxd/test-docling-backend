@@ -1,0 +1,11 @@
+<div class="space-y-4">
+    <div class="flex justify-between items-center">
+        <h2 class="text-xl font-semibold">Chunking Results</h2>
+        <a href="/export/{{ chunk_key }}" download="chunks.json" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Export as JSON</a>
+    </div>
+    {% for chunk in chunks %}
+    <div class="p-4 bg-gray-50 border rounded">
+        {{ chunk | safe }}
+    </div>
+    {% endfor %}
+</div>
