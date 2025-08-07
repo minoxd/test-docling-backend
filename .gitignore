@@ -4,3 +4,4 @@
 .env
 saves/*
 temp_uploads/*
+**/__pycache__/*
