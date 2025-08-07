@@ -44,7 +44,7 @@ def extract_chunk_headings(chunks: list):
     return chunk_headings
 
 
-def save_as_files(result: ConversionResult, filename: str, image_mode: ImageRefMode, save_dir: str = 'saves'):
+def save_as_html(result: ConversionResult, filename: str, image_mode: ImageRefMode, save_dir: str = 'saves'):
     save_dir = Path(save_dir)
     save_dir.mkdir(exist_ok=True)
     filename = Path(save_dir, filename).with_suffix(".html")
@@ -52,12 +52,7 @@ def save_as_files(result: ConversionResult, filename: str, image_mode: ImageRefM
     artifacts_dir = filename.with_suffix("")
     artifacts_dir = artifacts_dir.with_name(artifacts_dir.name + "_artifacts")
 
-    result.document.save_as_html(filename=filename, artifacts_dir=artifacts_dir,
-                                 image_mode=image_mode)
-    result.document.save_as_markdown(filename=filename.with_suffix(".md"), artifacts_dir=artifacts_dir,
-                                     image_mode=image_mode)
-    result.document.save_as_json(filename=filename.with_suffix(".json"), artifacts_dir=artifacts_dir,
-                                 image_mode=image_mode)
+    result.document.save_as_html(filename=filename, artifacts_dir=artifacts_dir, image_mode=image_mode)
 
     return filename, artifacts_dir
 
@@ -148,7 +143,7 @@ async def process(source: str):
     chunk_headings = extract_chunk_headings(chunks)
 
     filename: str = 'my_raw'
-    save_results: tuple[Path, Path, ] = save_as_files(result=result, filename=filename,
+    save_results: tuple[Path, Path,] = save_as_html(result=result, filename=filename,
                                                     image_mode=ImageRefMode.REFERENCED)
     filename, artifacts_dir = save_results
 
