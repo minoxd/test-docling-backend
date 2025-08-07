@@ -39,3 +39,9 @@ async def upload_file(request: Request, file: UploadFile = File(None), url: str 
     #     "chunks": chunks,
     #     "chunk_key": key
     # })
+
+@app.get("/export/{chunk_key}", response_class=JSONResponse)
+async def export_chunks(chunk_key: str):
+    if chunk_key not in chunks_storage:
+        raise HTTPException(status_code=404, detail="Chunks not found")
+    return {"chunks": chunks_storage[chunk_key]}
