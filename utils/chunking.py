@@ -8,6 +8,7 @@ from docling.datamodel.base_models import InputFormat
 from docling.datamodel.document import ConversionResult
 from docling.datamodel.pipeline_options import PdfPipelineOptions
 from docling.document_converter import DocumentConverter, PdfFormatOption
+from docling_core.transforms.chunker import BaseChunk
 from docling_core.transforms.chunker.hybrid_chunker import HybridChunker
 from docling_core.types.doc import ImageRefMode
 
@@ -32,6 +33,46 @@ def create_converter():
 def create_chunker():
     chunker = HybridChunker()
     return chunker
+
+
+class Node(object):
+
+    def __init__(self, title, children=None):
+        self.title = title
+        self.children = children or []
+
+    def __str__(self):
+        return self.title
+
+    # depth first search
+    def __iter__(self):
+        yield self
+        for child in self.children:
+            for node in child:
+                yield node
+
+
+def construct_chunk_tree(chunks: list[BaseChunk], tree_title: str = 'root'):
+    tree = Node(tree_title)
+    node_dict = {tree_title: tree}
+
+    for idx, chunk in enumerate(chunks):
+        chunk_json_dict = chunk.export_json_dict()
+        headings = [tree_title]
+        headings.extend(chunk_json_dict['meta']['headings'])
+
+        for heading in headings:
+            if heading not in node_dict:
+                node_dict[heading] = Node(heading)
+
+        while len(headings) >= 2:
+            node = node_dict[headings[0]]
+            child_node = node_dict[headings[1]]
+            if child_node not in node.children:
+                node.children.append(child_node)
+            headings.pop(0)
+
+    return tree
 
 
 def extract_chunk_headings(chunks: list):
@@ -98,7 +139,9 @@ async def upload_images(body_content: list[Tag], artifacts_dir: Path, config: di
     figures = []
     for child in body_content:
         if child.name == 'figure':
-            figures.append(child)
+            child_of_child = child.find_all(name=True, recursive=False)
+            if len(child_of_child) == 1 and child_of_child[0].name == 'img':
+                figures.append(child)
 
     artifacts = list(artifacts_dir.glob('*.png'))
 
@@ -117,8 +160,10 @@ async def upload_images(body_content: list[Tag], artifacts_dir: Path, config: di
         img['src'] = img_url
 
 
-def generate_output(body_content: list[Tag], chunks_headings: list[str]):
+def generate_output(body_content: list[Tag], chunk_tree: Node):
     indexes_chunk_begin = []
+    chunks_headings = [str(chunk) for chunk in chunk_tree]
+    chunks_headings.pop(0)
     for idx, child in enumerate(body_content):
         if child.string in chunks_headings:
             indexes_chunk_begin.append(idx)
@@ -129,7 +174,7 @@ def generate_output(body_content: list[Tag], chunks_headings: list[str]):
         html_chunks.append(
             ''.join([str(child) for child in body_content[indexes_chunk_begin[idx]:indexes_chunk_begin[idx + 1]]]))
 
-    return html_chunks
+    return html_chunks # output tree also
 
 
 async def process(source: str):
@@ -140,7 +185,7 @@ async def process(source: str):
     chunk_iter = chunker.chunk(result.document)
     chunks = list(chunk_iter)
 
-    chunk_headings = extract_chunk_headings(chunks)
+    chunk_tree = construct_chunk_tree(chunks)
 
     filename: str = 'my_raw'
     save_results: tuple[Path, Path,] = save_as_html(result=result, filename=filename,
@@ -156,5 +201,5 @@ async def process(source: str):
 
     await upload_images(body_content=body_content, artifacts_dir=artifacts_dir, config=config)
 
-    html_chunks = generate_output(body_content, chunk_headings)
+    html_chunks = generate_output(body_content=body_content, chunk_tree=chunk_tree)
     return html_chunks
