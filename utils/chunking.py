@@ -75,16 +75,6 @@ def construct_chunk_tree(chunks: list[BaseChunk], tree_title: str = 'root'):
     return tree
 
 
-def extract_chunk_headings(chunks: list):
-    chunk_headings = []
-    for chunk in chunks:
-        headings = chunk.export_json_dict()['meta']['headings']
-        if len(headings) != 1:
-            raise Exception(f'eyyo length of headings is {len(headings)}')
-        chunk_headings.append(headings[0])
-    return chunk_headings
-
-
 def save_as_html(result: ConversionResult, filename: str, image_mode: ImageRefMode, save_dir: str = 'saves'):
     save_dir = Path(save_dir)
     save_dir.mkdir(exist_ok=True)
