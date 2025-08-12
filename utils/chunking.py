@@ -165,12 +165,17 @@ def generate_output(body_content: list[Tag], chunk_tree: Node):
     chunks_headings = [str(chunk) for chunk in chunk_tree]
     chunks_headings.pop(0)
     for idx, child in enumerate(body_content):
+        if 'h' not in child.name:
+            continue
         if child.string in chunks_headings:
             indexes_chunk_begin.append(idx)
+            chunks_headings.pop(0)
     indexes_chunk_begin.append(len(body_content))
-
+    print(chunks_headings)
+    print(indexes_chunk_begin)
     html_chunks = []
     for idx in range(len(indexes_chunk_begin) - 1):
+        print(body_content[indexes_chunk_begin[idx]:indexes_chunk_begin[idx + 1]])
         html_chunks.append(
             ''.join([str(child) for child in body_content[indexes_chunk_begin[idx]:indexes_chunk_begin[idx + 1]]]))
 
