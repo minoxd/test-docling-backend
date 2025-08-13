@@ -1,3 +1,4 @@
+import pprint
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -59,6 +60,7 @@ def construct_chunk_tree(chunks: list[BaseChunk], tree_title: str = 'root'):
     for idx, chunk in enumerate(chunks):
         chunk_json_dict = chunk.export_json_dict()
         headings = [tree_title]
+        # pprint.pprint(chunk_json_dict)
         headings.extend(chunk_json_dict['meta']['headings'])
 
         for heading in headings:
