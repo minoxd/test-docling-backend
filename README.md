@@ -1,9 +1,16 @@
-- DocumentConverter -> HybridChunker -> json
+## Approaches
+1. Best:
+convert from chunk to dldoc then export as html (object-oriented document manipulation, but requires source code understanding)
+2. Alternatives:
+- find chunk by grouping html elements using chunk's headings (html formatting are kept, but chunk finding can be messed as headings can be repetitive)
+- contextualize chunk and put in `<p></p>` (easy to implement but no html formatting)
+
+## Output format example
 ```
 {
     "chunks": [
-        "<p>chunk 1</p>",
-        "<p>chunk 2</p>"
+        "<!-- HTML snippet 01 -->",
+        "<!-- HTML snippet 02 -->"
     ]
 }
 ```
