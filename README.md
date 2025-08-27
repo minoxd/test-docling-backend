@@ -14,3 +14,6 @@ convert from chunk to dldoc then export as html (object-oriented document manipu
     ]
 }
 ```
+
+## Notes
+1. table is chunked column-wise, meaning one column per chunk (i think this is a feature)
